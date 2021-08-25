@@ -57,17 +57,15 @@ GlobalVariable.strGlbNumImage = 0
 GlobalVariable.strGlbMenu = 'Login'
 
 
-GlobalVariable.strGlbCaptureFolder = (((('C:\\OttoAutomation\\CAPTURE\\' + GlobalVariable.strGlbMenu) + '\\') 
+GlobalVariable.strGlbCaptureFolder = (((('C:\\OttoAutomation\\CAPTURE\\EVERMOS\\' + GlobalVariable.strGlbMenu) + '\\') 
 	+ GlobalVariable.strGlbDate) + '\\')
 println(GlobalVariable.strGlbCaptureFolder)
 
 StopWatch runTime = StopWatch.createStarted()
 
-getLastRow = findTestData('LOGINJAGA').getRowNumbers()
+getLastRow = findTestData('Evermos_Data').getRowNumbers()
 
 for (int excelRow : (1..getLastRow)) { //buat running semua data
-
-
 //for (int excelRow : (1..1)) { //buat running data tertentu, ganti aja angkanya
 	
 	//mulai timer
@@ -75,11 +73,11 @@ for (int excelRow : (1..getLastRow)) { //buat running semua data
 	runTime.start()
 	
 	//Nomor data
-	TestData dataNKC 	= findTestData('LOGINJAGA')
-	String strNo		= dataNKC.getValue('NO', excelRow)
+	TestData dataJAGA 	= findTestData('Evermos_Data')
+	String strNo		= dataJAGA.getValue('NO', excelRow)
 	
 	CustomKeywords.'keyNKC.JAGA2GO.Jaga2Go'(strNo, excelRow) //Panggil sub login di keywords
-	CustomKeywords.'keyNKC.KeywordNKC.callStatus'(strNo, 'LOGINJAGA', 3) //REPORT DATA LOGIN
+	CustomKeywords.'keyNKC.KeywordNKC.callStatus'(strNo, 'LOGIN', 4) //REPORT DATA LOGIN
 	
 }
 //Mobile.pressBack()

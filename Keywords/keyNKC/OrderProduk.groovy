@@ -1,3 +1,5 @@
+package keyNKC
+
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -39,12 +41,24 @@ import org.apache.commons.lang3.time.StopWatch
 import java.lang.Integer as Integer
 import java.util.concurrent.TimeUnit
 
-Mobile.startApplication('C:\\OttoAutomation\\Evermos.apk', false)
+//import internal.GlobalVariable
 
-//not_run: Mobile.pressBack()
+public class OrderProduk {
+	@Keyword
+	def J2GOrder(String strNo, int excelRow){
 
-//not_run: GlobalVariable.mobileHeight = tinggiDevice
+		TestData dataJAGA 				= findTestData('OrderProduk')
+		String strProdukName			= dataJAGA.getValue('PRODUK NAME', excelRow)
+		//String strPilKendaraan			= dataJAGA.getValue('PILIH KENDARAAN', excelRow)
+		//String strPerlPeriodik			= dataJAGA.getValue('PERLINDUNGAN PERIODIK', excelRow)
+		//String strPembayaran			= dataJAGA.getValue('PEMBAYARAN')
+		GlobalVariable.strGlbMenu 		= 'Order'
 
-//not_run: GlobalVariable.mobileWidth = lebarDevice
+		//PILIH PRODUK
+		if (strProdukName == 'PERIODIK') {
+			Mobile.tap(findTestObject('Object Repository/JAGA2GO/btnbuyPeriodik'), 1)
+			Mobile.tap(findTestObject('Object Repository/JAGA2GO/btnLanjutBeli'),1)
+		}
 
-Thread.sleep(2000)
+	}
+}

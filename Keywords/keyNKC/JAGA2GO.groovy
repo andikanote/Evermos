@@ -47,63 +47,61 @@ public class JAGA2GO {
 	@Keyword
 	def Jaga2Go(String strNo, int excelRow){
 
-		TestData dataJAGA 			= findTestData('LOGINJAGA')
+		TestData dataJAGA 			= findTestData('Evermos_Data')
 		String strUsername			= dataJAGA.getValue('USERNAME', excelRow)
 		String strPassword			= dataJAGA.getValue('PASSWORD', excelRow)
 		GlobalVariable.strGlbMenu = 'Login'
 
-		//Boolean cekObjekExist = Mobile.verifyElementExist(findTestObject('Object Repository/JAGA2GO/txtViewSelamatDatang'), 1, FailureHandling.OPTIONAL)
-
-		//while (cekObjekExist == false) {
-		//cekObjekExist = Mobile.verifyElementExist(findTestObject('Object Repository/JAGA2GO/txtViewSelamatDatang'), 2, FailureHandling.OPTIONAL)
-
-		//if (cekObjekExist == false) {
-		//logout
-		//Thread.sleep(100)
-		//}
-
-		//SLIDER
-		Mobile.tapAtPosition(835, 2050, FailureHandling.STOP_ON_FAILURE)
-		Mobile.tapAtPosition(835, 2050, FailureHandling.STOP_ON_FAILURE)
-		Mobile.tapAtPosition(835, 2050, FailureHandling.STOP_ON_FAILURE) //btnMasuk LoginPage
-		keyNKC.KeywordNKC.CaptureScreen(strNo)
+		//STEP#1
 		Thread.sleep(1000)
+		Mobile.tapAtPosition(138, 1713, FailureHandling.STOP_ON_FAILURE)
+		keyNKC.KeywordNKC.CaptureScreen(strNo) //capture
 
-		//USERNAME
-		Mobile.tapAtPosition(200, 845, FailureHandling.STOP_ON_FAILURE)
-		Mobile.tapAtPosition(800, 500, FailureHandling.STOP_ON_FAILURE)
-		Thread.sleep(1000)
-		Mobile.setText(findTestObject('Object Repository/JAGA2GO/txtUsername'), strUsername, 0)
-		keyNKC.KeywordNKC.CaptureScreen(strNo)
-		Thread.sleep(1000)
+		Boolean cekObjekExist = Mobile.verifyElementExist(findTestObject('Evermos/txt.Evermos'), 1, FailureHandling.OPTIONAL)
 
+		while (cekObjekExist == false) {
+			cekObjekExist = Mobile.verifyElementExist(findTestObject('Evermos/txt.Evermos'), 2, FailureHandling.OPTIONAL)
 
-		//PASSWORD
-		Mobile.tapAtPosition(200, 1050, FailureHandling.STOP_ON_FAILURE)
-		Mobile.setText(findTestObject('Object Repository/JAGA2GO/txtPassword'), strPassword, 0)
-		keyNKC.KeywordNKC.CaptureScreen(strNo)
-		Thread.sleep(1000)
-
-		//btnLogin
-		Mobile.tap(findTestObject('Object Repository/JAGA2GO/btnLogin'), 1)
-		Thread.sleep(1000)
-
-		//VALIDASI LOGIN
-		Boolean cekLoginExist = Mobile.verifyElementExist(findTestObject('Object Repository/JAGA2GO/txtViewSelamatDatang'), 1, FailureHandling.OPTIONAL)
-
-		if (GlobalVariable.strGlbMenu == 'Login') {
-			if (cekLoginExist == true) {
-				GlobalVariable.strGlbStatus = 'PASSED'
-				GlobalVariable.strGlbKeterangan = 'LOGIN BERHASIL'
-			} else {
-				GlobalVariable.strGlbStatus = 'FAILED'
-				GlobalVariable.strGlbKeterangan = 'LOGIN GAGAL'
+			if (cekObjekExist == false) {
+				//logout
+				Thread.sleep(100)
 			}
 		}
 
-		Mobile.tapAtPosition(100, 200, FailureHandling.STOP_ON_FAILURE)
+		//STEP#2
+		Thread.sleep(1000)
+		Mobile.tapAtPosition(66, 837, FailureHandling.STOP_ON_FAILURE)
+		Mobile.pressBack()
+		Mobile.setText(findTestObject('Object Repository/Evermos/noHP'), strUsername, 0)
+		keyNKC.KeywordNKC.CaptureScreen(strNo) //capture
+
+		Mobile.tapAtPosition(66, 1086, FailureHandling.STOP_ON_FAILURE)
+		Mobile.pressBack()
+		Mobile.clearText(findTestObject('Object Repository/Evermos/Pw'), 1)
+		Mobile.setText(findTestObject('Object Repository/Evermos/Pw'), strPassword, 0)
+		keyNKC.KeywordNKC.CaptureScreen(strNo) //capture
+
+		Thread.sleep(1000)
+		//btnLogin
+		Mobile.tap(findTestObject('Object Repository/Evermos/Msk'), 1)
+		keyNKC.KeywordNKC.CaptureScreen(strNo) //capture
+		Thread.sleep(10000)
+
+		//VALIDASI LOGIN
+		Boolean cekLoginExist = Mobile.verifyElementExist(findTestObject('Object Repository/Evermos/txt.Evermos'), 1, FailureHandling.OPTIONAL)
+
+		if (GlobalVariable.strGlbMenu == 'Login') {
+			if (cekLoginExist == true) {
+				GlobalVariable.strGlbStatus = 'FAILED'
+				GlobalVariable.strGlbKeterangan = 'YAH, GAGAL'
+			} else {
+				GlobalVariable.strGlbStatus = 'PASSED'
+				GlobalVariable.strGlbKeterangan = 'GOOD!!'
+			}
+		}
 
 	}
 }
+
 
 

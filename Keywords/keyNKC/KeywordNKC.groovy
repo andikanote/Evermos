@@ -124,13 +124,13 @@ public class KeywordNKC {
 	//CALL STATUS PASSED OR FAILED
 	@Keyword
 	def callStatus(String strNo, String namaMenu, int kolomAwal) {
-		FileInputStream file = new FileInputStream (new File('C:\\OttoAutomation\\data\\master_data_jaga.xlsx'))
+		FileInputStream file = new FileInputStream (new File('C:\\OttoAutomation\\data\\master_data_evermos.xlsx'))
 		XSSFWorkbook workbook = new XSSFWorkbook(file)
 		XSSFSheet sheet = workbook.getSheet(namaMenu)
 		int strGetRow = Integer.parseInt(strNo)
 
 		sheet.getRow(strGetRow).createCell(kolomAwal+1).setCellValue(GlobalVariable.strGlbStatus)
-		sheet.getRow(strGetRow).createCell(6).setCellValue(GlobalVariable.strGlbKeterangan)
+		sheet.getRow(strGetRow).createCell(7).setCellValue(GlobalVariable.strGlbKeterangan)
 
 		String ExpectedResult	= sheet.getRow(strGetRow).getCell(kolomAwal).getStringCellValue();
 		String ActualResult 	= sheet.getRow(strGetRow).getCell(kolomAwal+1).getStringCellValue();
@@ -143,7 +143,7 @@ public class KeywordNKC {
 
 		file.close()
 
-		FileOutputStream outFile =new FileOutputStream(new File('C:\\OttoAutomation\\data\\master_data_jaga.xlsx'))
+		FileOutputStream outFile =new FileOutputStream(new File('C:\\OttoAutomation\\data\\master_data_evermos.xlsx'))
 		workbook.write(outFile)
 		outFile.close()
 	}

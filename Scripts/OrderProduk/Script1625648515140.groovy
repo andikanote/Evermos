@@ -63,11 +63,9 @@ println(GlobalVariable.strGlbCaptureFolder)
 
 StopWatch runTime = StopWatch.createStarted()
 
-getLastRow = findTestData('LOGINJAGA').getRowNumbers()
+getLastRow = findTestData('OrderProduk').getRowNumbers()
 
 for (int excelRow : (1..getLastRow)) { //buat running semua data
-
-
 //for (int excelRow : (1..1)) { //buat running data tertentu, ganti aja angkanya
 	
 	//mulai timer
@@ -75,11 +73,11 @@ for (int excelRow : (1..getLastRow)) { //buat running semua data
 	runTime.start()
 	
 	//Nomor data
-	TestData dataJAGA	= findTestData('LOGINJAGA')
-	String strNo		= dataJAGA.getValue('NO', excelRow)
+	TestData dataNKC 	= findTestData('OrderProduk')
+	String strNo		= dataNKC.getValue('NO', excelRow)
 	
-	CustomKeywords.'keyNKC.NKCLogin.LoginNKC'(strNo, excelRow) //Panggil sub login di keywords
-	CustomKeywords.'keyNKC.NKCLogin.callStatus'(strNo, 'Login', 3) //REPORT DATA LOGIN
+	CustomKeywords.'keyNKC.OrderProduk.J2GOrder'(strNo, excelRow) //Panggil sub login di keywords
+	CustomKeywords.'keyNKC.KeywordNKC.callStatus'(strNo, 'OrderProduk', 6) //REPORT DATA LOGIN
 	
 }
 //Mobile.pressBack()
